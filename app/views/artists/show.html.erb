@@ -10,12 +10,7 @@
   <%= @artist.record_label %>
 </p>
 <p>
-  <strong>Songs:</strong>
-  <ul>
-  <% @artist.songs.each do |song| %>
-    <li><%= song.title %></li>
-  <% end %>
-  </ul>
+  <%= render 'songs/song_list', songs: @artist.songs %>
 </p>
 
 <%= link_to 'Edit', edit_artist_path(@artist) %> |
