@@ -11,5 +11,12 @@ describe "songs_feature" do
     song = Song.find_by(title: "Simple")
     expect(song.artist.name).to eq("MC Hammer")
     expect(song.genre.name).to eq("Rap")
-  end  
+  end
+
+  it "can't create invalid songs" do
+    visit new_song_path
+    click_button "Create Song"
+    expect(page).to have_content("can't be blank")
+    expect(Song.all.count).to eq(0)
+  end
 end

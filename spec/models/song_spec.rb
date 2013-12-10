@@ -1,6 +1,21 @@
 require 'spec_helper'
 
 describe Song do
+  it "requires a title" do
+    song = Song.new
+    expect(song.valid?).to eq(false)
+    
+    #I wouldn't test below this line
+    #just testing ActiveRecord::Validations
+    expect(song.errors.messages[:title]).to eq(["can't be blank"])
+    song.save
+    expect(Song.all.count).to eq(0)
+    song.title = "I have a title"
+    song.save
+    expect(Song.all.count).to eq(1)
+
+  end
+
   it "has a title" do
     song = Song.create(:title => "Walk this Way")
     expect(Song.find_by(:title => "Walk this Way")).to eq(song)
