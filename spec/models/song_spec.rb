@@ -31,4 +31,24 @@ describe Song do
     song = Song.create(title: "song", artist_name: "artist name")
     expect(song.artist_name).to eq("artist name")
   end
+
+  it "has a genre" do
+    song = Song.new(title: "Rap God")
+    song.genre = Genre.new(name: "Rap")
+    expect(song.genre.name).to eq("Rap")
+  end
+
+  it "can assign a genre by name" do
+    song = Song.create(:title => "Rap God")
+    song.genre_name = "Rap"
+    expect(song.genre.name).to eq("Rap")
+    song2 = Song.create(title: "2 Legit 2 Quit")
+    song2.genre_name = "Rap"
+    expect(Genre.all.count).to eq(1)
+  end
+
+  it "knows its genre name" do
+    song = Song.create(title: "song", genre_name: "genre")
+    expect(song.genre_name).to eq("genre")
+  end
 end
