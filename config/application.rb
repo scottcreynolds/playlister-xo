@@ -20,13 +20,14 @@ module PlaylisterXo
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
     config.generators do |g|
-        g.test_framework :rspec, :view_specs => false, 
-                         :helper_specs => false
-        g.jbuilder false
-        g.coffee false
-        g.view_specs false
-        g.helpers false
-        g.helper_specs false
+      g.test_framework :rspec, fixture: true
+      g.fixture_replacement :factory_girl, dir: 'spec/factories'
+      g.helper false
+      g.assets false
+      g.jbuilder false
+      g.request_specs false
+      g.view_specs false
+      g.helper_specs false
     end
   end
 end
