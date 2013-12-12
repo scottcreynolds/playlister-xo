@@ -1,10 +1,12 @@
 class ArtistsController < ApplicationController
   before_action :set_artist, only: [:show, :edit, :update, :destroy]
-
+  skip_before_action :set_a_thing
   # GET /artists
   # GET /artists.json
+
   def index
     @artists = Artist.all
+    
   end
 
   # GET /artists/1
@@ -69,5 +71,9 @@ class ArtistsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def artist_params
       params.require(:artist).permit(:name, :record_label, :song_names => [])
+    end
+
+    def get_main_artist
+      session[:main_artist] = @artists.first.name
     end
 end
