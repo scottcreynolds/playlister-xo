@@ -42,8 +42,12 @@ describe Artist do
   end
 
   it "has a slugified name" do
-    artist.name = "new order"
+    artist.name = "New Order"
     artist.save
     expect(artist.slug).to eq("new-order")
+  end
+
+  it "uses slug as param" do
+    expect(artist.to_param).to eq(artist.slug)
   end
 end

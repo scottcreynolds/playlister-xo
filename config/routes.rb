@@ -4,7 +4,10 @@ PlaylisterXo::Application.routes.draw do
   resources :songs
 
   root 'artists#index'
+  # get 'artists/:slug' => 'artists#show', :as => :artist
   resources :artists
+
+  #"get /artists/:id  -> #show"
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
