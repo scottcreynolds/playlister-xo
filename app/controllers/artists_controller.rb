@@ -1,17 +1,21 @@
 class ArtistsController < ApplicationController
   before_action :set_artist, only: [:show, :edit, :update, :destroy]
   skip_before_action :set_a_thing
+  
   # GET /artists
   # GET /artists.json
 
   def index
     @artists = Artist.all
-    
   end
 
   # GET /artists/1
   # GET /artists/1.json
   def show
+    respond_to do |format|
+      format.html { render 'show'}
+      format.json { render json: @artist, serializer: OtherSerializer}
+    end
   end
 
   # GET /artists/new
