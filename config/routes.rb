@@ -1,4 +1,5 @@
 PlaylisterXo::Application.routes.draw do
+  devise_for :users
   resources :genres
 
   get "songs/makesome" => "songs#make_some", 
