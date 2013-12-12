@@ -1,6 +1,9 @@
 PlaylisterXo::Application.routes.draw do
   resources :genres
 
+  get "songs/makesome" => "songs#make_some", 
+        :as => :make_songs
+        
   resources :songs
 
   root 'artists#index'

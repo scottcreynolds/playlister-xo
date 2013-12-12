@@ -1,6 +1,13 @@
 class SongsController < ApplicationController
   before_action :set_song, only: [:show, :edit, :update, :destroy]
 
+  def make_some
+    3.times do |i|
+      Song.create(:title => "new song #{i}")
+    end
+    render :partial => 'song_list', locals: {songs: Song.all}
+  end
+
   # GET /songs
   # GET /songs.json
   def index

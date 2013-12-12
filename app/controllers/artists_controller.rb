@@ -9,6 +9,10 @@ class ArtistsController < ApplicationController
     @artists = Artist.all
   end
 
+  def api_call
+    render json: @object
+  end
+
   # GET /artists/1
   # GET /artists/1.json
   def show
