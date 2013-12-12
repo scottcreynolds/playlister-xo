@@ -1,5 +1,7 @@
 class Artist < ActiveRecord::Base
   has_many :songs
+
+  
   
   def song_names=(names)
     names.each do |title|

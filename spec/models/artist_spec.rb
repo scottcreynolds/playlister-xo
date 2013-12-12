@@ -1,10 +1,13 @@
 require 'spec_helper'
 
 describe Artist do
+
+  let(:artist) {FactoryGirl.create(:artist)}
+
   it "has name and record label" do
-    artist = Artist.create(:name => "jethro", :record_label => "test")
+    artist = FactoryGirl.create(:artist)
     expect(Artist.all.count).to eq(1)
-    found = Artist.find_by(:name => "jethro")
+    found = Artist.find_by(:name => "Aerosmith")
     expect(found).to eq(artist)
   end
 
@@ -36,5 +39,11 @@ describe Artist do
     artist.save
     expect(artist.song_names)
     .to include("Sowing the Seeds of Love")
+  end
+
+  it "has a slugified name" do
+    artist.name = "new order"
+    artist.save
+    expect(artist.slug).to eq("new-order")
   end
 end
