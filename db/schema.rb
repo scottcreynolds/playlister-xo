@@ -13,6 +13,9 @@
 
 ActiveRecord::Schema.define(version: 20131212223532) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "artists", force: true do |t|
     t.string   "name"
     t.string   "record_label"
@@ -21,7 +24,7 @@ ActiveRecord::Schema.define(version: 20131212223532) do
     t.string   "slug"
   end
 
-  add_index "artists", ["slug"], name: "index_artists_on_slug"
+  add_index "artists", ["slug"], name: "index_artists_on_slug", using: :btree
 
   create_table "genres", force: true do |t|
     t.string   "name"
@@ -37,7 +40,7 @@ ActiveRecord::Schema.define(version: 20131212223532) do
     t.integer  "genre_id"
   end
 
-  add_index "songs", ["genre_id"], name: "index_songs_on_genre_id"
+  add_index "songs", ["genre_id"], name: "index_songs_on_genre_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -54,7 +57,7 @@ ActiveRecord::Schema.define(version: 20131212223532) do
     t.datetime "updated_at"
   end
 
-  add_index "users", ["email"], name: "index_users_on_email", unique: true
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
 end
