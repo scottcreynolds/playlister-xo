@@ -1,8 +1,14 @@
 class Song < ActiveRecord::Base
-  belongs_to :artist
+  belongs_to :artist, touch: true
   belongs_to :genre
 
   validates :title, presence: true
+
+  after_commit :invalidate_cache
+
+  def invalidate_cache
+    Rails.cache.clear([:artist, self.artist_id, :songs])
+  end
 
   def name
     self.title

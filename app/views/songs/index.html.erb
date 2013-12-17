@@ -1,6 +1,8 @@
 <h1>Listing All Songs</h1>
 <div id="song_list_partial">
-  <%= render 'song_list', songs: @songs %>
+  <% cache @songs do %>
+    <%= render 'song_list', songs: @songs %>
+  <% end %>
 </div>
 <br>
 <a href="#" id="make_songs">Make New Songs</a>

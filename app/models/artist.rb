@@ -14,7 +14,9 @@ class Artist < ActiveRecord::Base
   end
 
   def song_names
-    self.songs.map{|s| s.title }
+    Rails.cache.fetch([:artist, self.id, :songs]) do
+      self.songs.map{|s| s.title }
+    end
   end
 
   def to_param

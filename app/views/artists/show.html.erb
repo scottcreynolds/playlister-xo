@@ -10,8 +10,8 @@ Main Artist: <%= session[:main_artist] %>
   <%= @artist.record_label %>
 </p>
 <p>
+  <% cache @artist do %>
   <%= render 'songs/song_list', songs: @artist.songs %>
+  <% end %>
 </p>
 
-<%= link_to 'Edit', edit_artist_path(@artist) %> |
-<%= link_to 'Back', artists_path %>
