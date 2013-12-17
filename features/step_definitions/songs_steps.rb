@@ -17,7 +17,7 @@ Then(/^I should see "(.*?)" by "(.*?)" on the Jukebox page$/) do |song_name, art
   expect(page).to have_content "#{song_name} - by #{artist_name}"
 end
 
-Then(/^I should be on the all songs page$/) do
+Then /^I should be on the all songs page$/ do
   expect(current_path).to eq(songs_path)
   expect(page).to have_content("All Songs")
 end

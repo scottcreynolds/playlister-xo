@@ -11,7 +11,9 @@ describe SongsController do
   # in order to pass any filters (e.g. authentication) defined in
   # SongsController. Be sure to keep this updated too.
   let(:valid_session) { {} }
-
+  before(:each) do
+    sign_in FactoryGirl.create(:user)
+  end
   describe "GET index" do
     it "assigns all songs as @songs" do
       song = Song.create! valid_attributes

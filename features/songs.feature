@@ -3,6 +3,9 @@ Feature: Song Management
   I need to be able to add songs
   So that you know, people can pay to listen
 
+  Background:
+    Given I am logged in
+    
   Scenario: Adding Songs
     Given I am on the add songs page
     When I add "2 Legit 2 Quit"
