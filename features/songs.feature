@@ -5,7 +5,7 @@ Feature: Song Management
 
   Background:
     Given I am logged in
-    
+
   Scenario: Adding Songs
     Given I am on the add songs page
     When I add "2 Legit 2 Quit"
