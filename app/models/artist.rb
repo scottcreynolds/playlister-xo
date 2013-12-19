@@ -8,7 +8,7 @@ class Artist < ActiveRecord::Base
     self.slug = self.name.gsub(" ", "-").downcase
   end
   
-  def song_names=(names)
+  def song_names=(one_or_more_names)
     names.each do |title|
       self.songs.build(title: title)
     end
