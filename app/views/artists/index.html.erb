@@ -17,6 +17,10 @@ current user: <%= current_user %>
       <tr>
         <td><%= artist.name %></td>
         <td><%= artist.record_label %></td>
+        <td><% artist.songs.each do |song| %>
+          <%= song.title %> <%= song.genre.name unless song.genre.nil? %>
+          <% end %>
+        </td>
         
        
       </tr>

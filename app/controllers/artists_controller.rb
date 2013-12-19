@@ -6,7 +6,7 @@ class ArtistsController < ApplicationController
   # GET /artists.json
 
   def index
-    @artists = Artist.all
+    @artists = Artist.includes([:songs, :genres]).load
   end
 
   def label_index

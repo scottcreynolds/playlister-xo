@@ -6,6 +6,8 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-Artist.all.each do |artist|
-  artist.save if artist.slug.nil?
+10.times do |i|
+  a = Artist.new(name: "Artist#{i}")
+  a.songs.build(title: "song!", genre_name: "rap")
+  a.save
 end
