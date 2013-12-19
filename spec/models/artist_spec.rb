@@ -68,4 +68,13 @@ describe Artist do
     artist3 = Artist.create(name: "indie jerks")
     expect(Artist.with_record_labels.count).to eq(2)
   end
+
+  it "has genres" do
+    artist = Artist.create(name: "Blur")
+    artist.songs.build(title: "song 1", genre_name: "Rap")
+    artist.songs.build(title: "song 2", genre_name: "Rock")
+    artist.save
+    expect(artist.genres.count).to eq(2)
+    expect(artist.genres).to include Genre.find_by(name: "Rap")
+  end
 end
