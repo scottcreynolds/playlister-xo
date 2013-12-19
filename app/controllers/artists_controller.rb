@@ -9,6 +9,11 @@ class ArtistsController < ApplicationController
     @artists = Artist.all
   end
 
+  def label_index
+    label = params[:label]
+    @artists = Artist.with_label(label)
+  end
+
   def api_call
     render json: @object
   end

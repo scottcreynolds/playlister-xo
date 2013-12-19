@@ -50,4 +50,22 @@ describe Artist do
   it "uses slug as param" do
     expect(artist.to_param).to eq(artist.slug)
   end
+
+  it "can find artists for a given genre" do
+    artist = Artist.create(name: "Blur")
+    artist.songs.build(title: "song 1", genre_name: "Rap")
+    artist.songs.build(title: "song 2", genre_name: "Rock")
+    artist.save
+    artist2 = Artist.create(name: "Run DMC")
+
+    a = Artist.find_by_genre("Rock").first
+    expect(a).to eq(artist)
+  end
+
+  it "can find artists that have a record label" do
+    artist = Artist.create(name: "Blur", record_label: "Interscope")
+    artist2 = Artist.create(name: "Aerosmith", record_label: "Epic")
+    artist3 = Artist.create(name: "indie jerks")
+    expect(Artist.with_record_labels.count).to eq(2)
+  end
 end

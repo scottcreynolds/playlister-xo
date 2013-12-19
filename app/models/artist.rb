@@ -32,4 +32,19 @@ class Artist < ActiveRecord::Base
     end
   end
 
+  def self.find_by_genre(genre_name)
+    #AREL
+    joins(:songs => :genre)
+    .where("genres.name ILIKE ?", genre_name)
+  end
+
+  def self.with_record_labels
+    where.not(:record_label => :nil)
+    #where("record_label is not null")
+  end
+
+  def self.with_specific_label(label)
+    where(record_label: label)
+  end
+
 end
