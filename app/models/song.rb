@@ -13,7 +13,7 @@ class Song < ActiveRecord::Base
   def name
     self.title
   end
-  
+
   def artist_name
     self.artist.name unless self.artist.nil?
   end
