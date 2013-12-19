@@ -48,4 +48,8 @@ class Artist < ActiveRecord::Base
     where(record_label: label)
   end
 
+  def new_method
+    true
+  end
+
 end
