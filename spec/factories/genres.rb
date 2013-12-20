@@ -1,7 +1,7 @@
 require 'factory_girl'
 
 FactoryGirl.define do
-  factory :song do
-    title "Song 2"
+  factory :genre do
+    name "rap"
   end
 end

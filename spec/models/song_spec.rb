@@ -4,66 +4,51 @@ describe Song do
   it "requires a title" do
     song = Song.new
     expect(song.valid?).to eq(false)
-    
-    #I wouldn't test below this line
-    #just testing ActiveRecord::Validations
+    # I wouldn't test below this line because
+    # that' just testing ActiveRecord::Validations
+    # which is already well-tested, but this is how
+    # we know for sure it works
     expect(song.errors.messages[:title]).to eq(["can't be blank"])
     song.save
     expect(Song.all.count).to eq(0)
     song.title = "I have a title"
     song.save
     expect(Song.all.count).to eq(1)
-
-  end
-
-  it "has a title" do
-    song = Song.create(:title => "Walk this Way")
-    expect(Song.find_by(:title => "Walk this Way")).to eq(song)
   end
 
   it "belongs to an artist" do
-    artist = Artist.new(:name => "Aerosmith")
-    song = Song.new(:title => "Crazy")
-    song.artist = artist
+    artist = build(:artist)
+    song = build(:song, title: "Crazy", artist: artist)
     expect(song.artist.name).to eq("Aerosmith")
   end
 
-  it "can assign an artist by name" do
-    song = Song.create(:title => "Crazy", :artist_name => "Aerosmith")
-    artist = Artist.find_by(:name => "Aerosmith")
-    expect(song.artist).to eq(artist)
-  end
-
-  it "finds artist if exists by name instead of create" do
-    artist = Artist.create(name: "blur")
-    expect(Artist.all.count).to eq(1)
-    song = Song.create(title: "Song 2", artist_name: "blur")
-    expect(song.artist).to eq(artist)
+  it "can assign an artist by name with find or create" do
+    song = build(:song, artist_name: "Aerosmith")
+    expect(song.artist.name).to eq("Aerosmith")
+    song2 = build(:song, artist_name: "Aerosmith")
     expect(Artist.all.count).to eq(1)
   end
 
-  it "knows its artist name" do
-    song = Song.create(title: "song", artist_name: "artist name")
+  it "exposes artist name as a property" do
+    song = build(:song, artist_name: "artist name")
     expect(song.artist_name).to eq("artist name")
   end
 
   it "has a genre" do
-    song = Song.new(title: "Rap God")
-    song.genre = Genre.new(name: "Rap")
-    expect(song.genre.name).to eq("Rap")
+    genre = build(:genre)
+    song = build(:song, genre: genre)
+    expect(song.genre.name).to eq(genre.name)
   end
 
-  it "can assign a genre by name" do
-    song = Song.create(:title => "Rap God")
-    song.genre_name = "Rap"
+  it "assigns genre by name with find or create" do
+    song = build(:song, genre_name: "Rap")
     expect(song.genre.name).to eq("Rap")
-    song2 = Song.create(title: "2 Legit 2 Quit")
-    song2.genre_name = "Rap"
+    song2 = build(:song, genre_name: "Rap")
     expect(Genre.all.count).to eq(1)
   end
 
-  it "knows its genre name" do
-    song = Song.create(title: "song", genre_name: "genre")
+  it "exposes genre name directly" do
+    song = build(:song, genre_name: "genre")
     expect(song.genre_name).to eq("genre")
   end
 end
